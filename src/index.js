@@ -33,11 +33,16 @@ export default {
         if (userMessage.toLowerCase().trim().startsWith("model")) {
           let aiResponse = `Current AI model: ${aiModel}\n\n`
           if (userMessage.toLowerCase().trim() === "model") {
+            const usingModel = `Using AI model: <b>${aiModel}</b>\n\nTo set to a new model, send:\nmodel model_code`
+
+            // list all available models
             context.waitUntil(askGeminiAI(aiModel, env, chatId, userMessage))
+
+            context.waitUntil(sendTelegramMessage(usingModel, chatId, env, true))
             return new Response("OK")
           }
 
-          aiModel = userMessage.replace("model", "").trim()
+          aiModel = userMessage.replace("model", "").replace("MODEL", "").trim()
           aiResponse += `Successfully set to the new model: ${aiModel}`
           context.waitUntil(sendTelegramMessage(aiResponse, chatId, env))
           return new Response("OK")
