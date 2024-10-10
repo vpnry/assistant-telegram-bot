@@ -5,4 +5,4 @@ workers_dev = true
 
 
 [observability]
-enabled = true
+enabled = false
