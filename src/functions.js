@@ -85,7 +85,7 @@ export async function askGeminiAI(selectedAIModel, env, chatId, userMessage) {
   if (currentRequestCount >= GEMINI_REQUEST_LIMIT_PER_MINUTE) {
     const errorMessage = `Rate limit exceeded ${GEMINI_REQUEST_LIMIT_PER_MINUTE}/minute. Please try again later.`
     console.error(errorMessage)
-    await sendTelegramMessage(errorMessage, chatId, env)
+    await sendTelegramMessage(errorMessage, chatId, env, false)
     return
   }
 
@@ -111,7 +111,7 @@ export async function askGeminiAI(selectedAIModel, env, chatId, userMessage) {
     }
   } catch (error) {
     console.error(`Error in askGeminiAI: ${error.message}`)
-    await sendTelegramMessage(`An error occurred: ${error.message}`, chatId, env)
+    await sendTelegramMessage(`An error occurred: ${error.message}`, chatId, env, false)
   }
 }
 

@@ -12,7 +12,7 @@ export default {
     }
     try {
       const payload = await request.json()
-      console.log(payload)
+      // console.log(payload)
       if ("message" in payload) {
         let isConfiguredUser = payload.message.from.username
         if (isConfiguredUser !== env.MY_TELEGRAM_USERNAME) {
