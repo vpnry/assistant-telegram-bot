@@ -1,6 +1,13 @@
 import { askGeminiAI, sendTelegramMessage } from "./functions"
 
-let aiModel = "gemini-1.5-pro-latest"
+// let aiModel = "gemini-1.5-pro-latest"
+let aiModel = "gemini-1.5-flash-latest"
+
+/**
+ * Request limit:
+ * https://ai.google.dev/pricing
+ * The pro-exp... models are much better than the other models
+ */
 
 export default {
   async fetch(request, env, context) {

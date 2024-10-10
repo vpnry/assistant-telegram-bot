@@ -2,7 +2,10 @@ import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/ge
 
 // https://core.telegram.org/bots/api#sendmessage length 1-4096
 const MAX_TELEGRAM_MESSAGE_LENGTH = 3800
-const GEMINI_REQUEST_LIMIT_PER_MINUTE = 10
+
+// (free) requests per minute: gemini-1.5-flash:15, gemini-1.5-pro: 2
+// https://ai.google.dev/pricing
+const GEMINI_REQUEST_LIMIT_PER_MINUTE = 12
 
 let currentRequestCount = 0
 let lastRateLimitResetTime = Date.now()
@@ -82,8 +85,15 @@ export async function askGeminiAI(selectedAIModel, env, chatId, userMessage) {
   }
 
   // Check if the rate limit has been exceeded
-  if (currentRequestCount >= GEMINI_REQUEST_LIMIT_PER_MINUTE) {
-    const errorMessage = `Rate limit exceeded ${GEMINI_REQUEST_LIMIT_PER_MINUTE}/minute. Please try again later.`
+
+  // Check if the rate limit has been exceeded
+  let requestLimit = GEMINI_REQUEST_LIMIT_PER_MINUTE
+  if (selectedAIModel.includes("-pro-")) {
+    requestLimit = 2
+  }
+
+  if (currentRequestCount >= requestLimit) {
+    const errorMessage = `Rate limit exceeded ${requestLimit}/minute. Please try again later.`
     console.error(errorMessage)
     await sendTelegramMessage(errorMessage, chatId, env, false)
     return
