@@ -1,9 +1,8 @@
 import { askGeminiAI, sendTelegramMessage } from "./functions"
 
 // let aiModel = "gemini-1.5-pro-latest"
-// let aiModel = "gemini-1.5-flash-latest"
-let aiModel = "gemini-3-flash"
-
+// let aiModel = "gemini-3-flash"
+let aiModel = "gemini-flash-latest"
 
 
 /**
