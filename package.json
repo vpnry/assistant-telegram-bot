@@ -1,16 +1,14 @@
 {
   "name": "assistant",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "start": "wrangler dev"
   },
-  "devDependencies": {
-    "wrangler": "^3.80.2"
-  },
   "dependencies": {
-    "@google/generative-ai": "^0.21.0"
+    "@google/generative-ai": "^0.24.1",
+    "wrangler": "^4.59.2"
   }
 }

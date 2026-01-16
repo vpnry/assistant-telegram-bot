@@ -1,3 +1,16 @@
+# Dev notes:
+
+- Update dependencies: 
+
+```bash 
+npm outdated
+npm install
+
+# deploy, it will prompt to login Cloudflare
+npm run deploy 
+
+```
+
 # Gemini AI Studio Telegram Bot
 
 This Telegram bot allows you to interact with Gemini AI Studio directly through Telegram.
